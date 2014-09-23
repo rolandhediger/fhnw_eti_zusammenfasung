@@ -9,6 +9,7 @@
 \definecolor{listinggray}{gray}{0.9}
 \definecolor{lbcolor}{rgb}{0.9,0.9,0.9}
 \usepackage{tikz}
+\usetikzlibrary{automata,positioning}
 \newcommand*\circled[1]{\tikz[baseline=(char.base)]{
             \node[shape=circle,draw,inner sep=1pt] (char) {#1};}}
 %\author{kyriakosschwarz}
@@ -28,7 +29,6 @@
 \usepackage[utf8]{inputenc} 
 \usepackage{fancyhdr, graphicx}
 \usepackage[scaled=0.92]{helvet}
-\usepackage{enumitem}
 \usepackage{parskip}
 \usepackage[a4paper,top=2cm]{geometry}
 \setlength{\textwidth}{17cm}
@@ -231,11 +231,27 @@ $\vert M \vert =$ Anzahl Elemente von $M$\\
 
 \uline{d}eterministic \uline{f}inite \uline{a}utomator\\
 \\
-??diagramm????\tab \uline{Statisch}\\
+\uline{Statisch}\\
+\begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto] 
+   \node[state,initial] (q_1)   {$q_1$}; 
+%   \node[state] (q_1) [above right=of q_0] {$q_1$}; 
+   \node[state, accepting] (q_2) [right=of q_1] {$q_2$}; 
+   \node[state](q_3) [right=of q_2] {$q_3$};
+    \path[->] 
+%    (q_1) edge  node {0} (q_1)
+%          edge  node [swap] {1} (q_2)
+    (q_1) edge  node [swap] {1} (q_2)
+          edge [loop above] node {0} ()
+    (q_2) edge [bend left=20] node {0} (q_3)
+          edge [loop above] node {1} ()      
+    (q_3) edge [bend left=20] node {0,1} (q_2); 
+%          edge [loop below] node {1} ();
+\end{tikzpicture}
 \\
-\uline{Verarbeitung}\tab \uline{Dynamisch}\\
 \\
-\uline{Input} \tab $\rightarrow^{1101}$\\
+\uline{Dynamisch}\\
+\\
+\uline{Verarbeitung}\tab Input: $\xrightarrow{1101}$\\
 \\
 1. Start in $q_1$\tab Startzustand\\
 2. Lese $\circled{1}101$\tab, $q_1 \rightarrow q_2$\\
