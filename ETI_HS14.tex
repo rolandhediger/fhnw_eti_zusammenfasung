@@ -1,5 +1,6 @@
-\documentclass[18pt,a4paper]{article}
+\documentclass[18pt,a4paper]{scrreprt}
 \usepackage[utf8]{inputenc}
+\usepackage[right=2cm,left=2cm,top=2cm]{geometry}
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{amssymb}
@@ -10,6 +11,14 @@
 \definecolor{lbcolor}{rgb}{0.9,0.9,0.9}
 \usepackage{tikz}
 \usetikzlibrary{automata,positioning}
+\usetikzlibrary{arrows}
+\usetikzlibrary{trees}
+\tikzset{
+  treenode/.style = {align=center, inner sep=0pt, text centered,
+    },
+  arn_n/.style = {treenode, circle, black,  draw=black,
+    fill=white, text width=1.5em},% arbre rouge noir, noeud noir
+}
 \newcommand*\circled[1]{\tikz[baseline=(char.base)]{
             \node[shape=circle,draw,inner sep=1pt] (char) {#1};}}
 %\author{kyriakosschwarz}
@@ -28,9 +37,8 @@
 %\usepackage[ngerman]{babel} % deutsche Silbentrennung
 \usepackage[utf8]{inputenc} 
 \usepackage{fancyhdr, graphicx}
-\usepackage[scaled=0.92]{helvet}
+
 \usepackage{parskip}
-\usepackage[a4paper,top=2cm]{geometry}
 \setlength{\textwidth}{17cm}
 \setlength{\oddsidemargin}{-0.5cm}
 
@@ -69,7 +77,7 @@
 	\vspace{5cm}
 	Einfuehrung in die Theoretische Informatik \\
 }
-%\author{Kyriakos Schwarz}
+\author{Kyriakos Schwarz,Roland Hediger}
 \date{HS 2014}
 
 
@@ -93,10 +101,10 @@
 
 % Inhalt Start
 
-\section{Erste Woche}
+\chapter{Erste Woche}
 
 
-\subsection{Sprachen}
+\section{Sprachen}
 
 Alphabet $\Sigma$: nichtleere endliche \uline{Menge} (von Zeichen)\\
 \\
@@ -227,7 +235,7 @@ $\vert M \vert =$ Anzahl Elemente von $M$\\
 \\
 \\
 \rule{\textwidth}{0.4mm}\\
-\subsection{Endliche Automaten DFA}
+\section{Endliche Automaten DFA}
 
 \uline{d}eterministic \uline{f}inite \uline{a}utomator\\
 \\
@@ -282,10 +290,10 @@ Liefert \uline{accept} oder \uline{fertig}\\
 \rule{\textwidth}{0.4mm}\\
 \\
  
-\section{Zweite Woche}
+\chapter{Zweite Woche}
 
 
-\subsection{DFA, NFA}
+\section{DFA, NFA}
 
 
 \begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto] 
@@ -427,8 +435,80 @@ $N_1:$ \tab $\Sigma = \{0,1\}$\\
 \\
 Eingabe: $010110$\\
 \\
+\newpage
+\textbf{Verarbeitung:}
 
+\begin{tikzpicture}[->,>=stealth',level/.style={sibling distance = 15cm/#1,
+  level distance = 2.5cm}]
+\node [arn_n](Root) {$q_1$}   
+child{node [arn_n] {$q_1$}
+child{node [arn_n](q_1){$q_1$} 
+	child {node [arn_n](q_10){$q_1$} 
+		child{node [arn_n] (q_11) {$q_1$} 
+			child{node [arn_n] (q_111) {$q_1$} 
+				child{node [arn_n] (q_1110) [below = of q_111] {$q_1$} edge from parent node[right]{0}}		
+			edge from parent node[left]{1}}
+			child{node [arn_n] (q_1122) {$q_2$}
+			child {node [arn_n] (q11220) [below = of q_1122] {$q_3$}edge from parent node[right]{0}}
+			child {node [arn_n] (q_1123)[right= of q_1122]{$q_3$}
+			edge from parent node[above]{$\epsilon$}}
+			edge from parent node[left]{1}}	
+			child{node [arn_n] (q_113) {$q_3$} edge from parent node[right]{1}}			
+		edge from parent node[left]{1}}
+		child{node [arn_n] (q_112) {$q_2$} 
+			child{node [arn_n] (q_212) [right=of q_112] {$q_3$}
+            child{ node [arn_n] {$q_4$} 
+				child{ node [arn_n]{$q_4$} edge from parent node[right]{0}}            
+            edge from parent node[right]{1}}			
+			 edge from parent node[above]{$\epsilon$} }		
+		edge from parent node[right]{1}}	
+edge from parent node[left]{0}}
+ edge from parent node[left] {1}
+}
+child{node [arn_n](q_2){$q_2$} 
+	child{ node [arn_n](q_20)[below=of q_2] {$q_3$}
+	child{ node [arn_n](q_41){$q_4$}
+    	child{node [arn_n](q_411){$q_4$}
+			child{node [arn_n] (q_4111){$q_4$} edge from parent node[right]{0}}    	
+    	 edge from parent node[right]{1}}	
+	 edge from parent node[right]{1}}	
+	 edge from parent node[right]{0}}
+	child{ node [arn_n](q_3) [right=of q_2] {$q_3$} edge from parent node[above]{$\epsilon$}}edge from parent node[right]{1}} edge from parent node[left] {0}}
+;
+%Extra todo :http://tex.stackexchange.com/questions/63612/tikz-tree-drawing-with-comments-to-each-level
+\end{tikzpicture}
+\\
+\\
+\rule{\textwidth}{0.4mm}\\
+\newpage
 
+\begin{tabular}{|p{10cm}}
+$P(Q) = 2^Q$ \\
+heisst \uline{Potenzmenge} \\
+ alle mögliche Teilmengen der Menge.
+\uline{$\sum_{\epsilon} = \sum \cup \{\epsilon\}$}
+\end{tabular}
+\\
+\\
+\\
+\\
+\uline{Def}  \uline{DFA} : Ein NFA ist ein 5-Tupel $(Q, \Sigma, \delta, q_0, F)$ mit:\\
+\\
+1. $Q$ ist eine endliche nichtleere Menge von Zustaenden\\
+\\
+2. $\Sigma$ ist das \uline{Eingabealphabet} (z.B. $1101$)\\
+\\
+3. $\delta : Q \times \Sigma \rightarrow^{total} P(Q)$\\
+\tab \uline{Transitionsfunktion}\\
+\\
+4. $q_0 \in Q$ Startzustand\\
+\\
+5. $F \subseteq Q$ Menge der akzeptierende Zustaende\\
+\\
+\\
+\rule{\textwidth}{0.4mm}\\
+\\
+ 
 
 
 
