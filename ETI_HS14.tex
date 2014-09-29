@@ -240,7 +240,7 @@ $\vert M \vert =$ Anzahl Elemente von $M$\\
 \uline{d}eterministic \uline{f}inite \uline{a}utomator\\
 \\
 \uline{Statisch}\\
-\begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto] 
+\begin{tikzpicture}[shorten >=1pt,node distance=3cm,on grid,auto] 
    \node[state,initial] (q_1)   {$q_1$}; 
 %   \node[state] (q_1) [above right=of q_0] {$q_1$}; 
    \node[state, accepting] (q_2) [right=of q_1] {$q_2$}; 
@@ -296,7 +296,7 @@ Liefert \uline{accept} oder \uline{fertig}\\
 \section{DFA, NFA}
 
 
-\begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto] 
+\begin{tikzpicture}[shorten >=1pt,node distance=3cm,on grid,auto] 
    \node[state,initial] (q_1)   {$q_1$}; 
    \node[state, accepting] (q_2) [right=of q_1] {$q_2$}; 
    \node[state](q_3) [right=of q_2] {$q_3$};
@@ -374,7 +374,7 @@ Automat $\rightarrow$ \uline{akzeptiert} / \uline{verwirft} \uline{Wort}\\
 \\
 $M_2:$ \tab $\Sigma = \{0,1\}$\\
 \\
-\begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto] 
+\begin{tikzpicture}[shorten >=1pt,node distance=3cm,on grid,auto] 
    \node[state,initial] (q_0)   {$q_0$}; 
     \path[->] 
     (q_0)  edge [loop below] node {0,1} (); 
@@ -390,7 +390,7 @@ erkennt $\emptyset$\\
 \\
 $M_3:$ \tab $\Sigma = \{0,1\}$\\
 \\
-\begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto] 
+\begin{tikzpicture}[shorten >=1pt,node distance=3cm,on grid,auto] 
    \node[state,initial, accepting] (q_0)   {$q_0$}; 
     \path[->] 
     (q_0)  edge [loop below] node {0,1} (); 
@@ -414,7 +414,7 @@ dieselbe Sprachen erkennen\\
 $N_1:$ \tab $\Sigma = \{0,1\}$\\
 \\
 \\
-\begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto] 
+\begin{tikzpicture}[shorten >=1pt,node distance=3cm,on grid,auto] 
    \node[state,initial] (q_1)   {$q_1$}; 
 %   \node[state] (q_1) [above right=of q_0] {$q_1$}; 
    \node[state] (q_2) [right=of q_1] {$q_2$}; 
@@ -482,12 +482,12 @@ child{node [arn_n](q_2){$q_2$}
 \rule{\textwidth}{0.4mm}\\
 \newpage
 
-\begin{tabular}{|p{10cm}}
-$P(Q) = 2^Q$ \\
-heisst \uline{Potenzmenge} \\
- alle mögliche Teilmengen der Menge.
-\uline{$\sum_{\epsilon} = \sum \cup \{\epsilon\}$}
-\end{tabular}
+%\begin{tabular}{|p{10cm}}
+\uline{Def:} \: $P = P(Q) = 2^Q =$ \uline{Potenzmenge} \\
+ist Menge aller Teilmengen von $Q$ \\
+\\
+$\Sigma_{\epsilon} = \Sigma \cup \{\epsilon\}$\\
+%\end{tabular}
 \\
 \\
 \\
@@ -498,7 +498,7 @@ heisst \uline{Potenzmenge} \\
 \\
 2. $\Sigma$ ist das \uline{Eingabealphabet} (z.B. $1101$)\\
 \\
-3. $\delta : Q \times \Sigma \rightarrow^{total} P(Q)$\\
+3. $\delta : Q \times \Sigma_{\textcolor{red}{\epsilon}} \rightarrow^{total} P(Q)$\\
 \tab \uline{Transitionsfunktion}\\
 \\
 4. $q_0 \in Q$ Startzustand\\
@@ -508,9 +508,6 @@ heisst \uline{Potenzmenge} \\
 \\
 \rule{\textwidth}{0.4mm}\\
 \\
- 
-
-
 
 
 
