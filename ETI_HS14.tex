@@ -33,6 +33,11 @@
 \usepackage{amsthm}
 \usepackage{ulem}
 
+\usepackage{amsmath}
+\usepackage{graphicx}
+
+%\usepackage{relsize}
+
 %PageStyle
 %\usepackage[ngerman]{babel} % deutsche Silbentrennung
 \usepackage[utf8]{inputenc} 
@@ -63,6 +68,8 @@
 \newcommand{\Ral}{\Longrightarrow}
 \newcommand{\Lal}{\Longleftarrow}
 
+\newcommand{\ts}{\textsuperscript}
+
 %Mine(new)
 \newcommand{\tab}{\hspace*{2em}}
 \newcommand{\cmark}{\ding{51}}%
@@ -79,8 +86,6 @@
 }
 \author{Kyriakos Schwarz,Roland Hediger}
 \date{HS 2014}
-
-
 
 
 
@@ -509,7 +514,71 @@ $\Sigma_{\epsilon} = \Sigma \cup \{\epsilon\}$\\
 \rule{\textwidth}{0.4mm}\\
 \\
 
+\chapter{Dritte Woche}
 
+
+\section{NFA}
+
+\begin{tikzpicture}[shorten >=1pt,node distance=3cm,on grid,auto] 
+   \node[state,initial] (q_1)   {$q_1$}; 
+%   \node[state] (q_1) [above right=of q_0] {$q_1$}; 
+   \node[state] (q_2) [right=of q_1] {$q_2$}; 
+   \node[state](q_3) [right=of q_2] {$q_3$};
+   \node[state, accepting] (q_4) [right=of q_3] {$q_4$}; 
+    \path[->] 
+%    (q_1) edge  node {0} (q_1)
+%          edge  node [swap] {1} (q_2)
+    (q_1) edge  node [swap] {1} (q_2)
+          edge [loop above] node {0,1} ()
+    (q_2) edge node [swap] {0, \textcolor{red}{$\circled{\textcolor{black}{$\epsilon$}}$}} (q_3)
+%          edge [loop above] node {1} ()      
+    (q_3) edge node [swap] {1} (q_4) 
+%          edge [loop below] node {1} ();
+    (q_4) edge [loop above] node {0,1} ();
+\end{tikzpicture}
+\\
+\\
+\uline{Berechnung NFA}\\
+\\
+Sei $N = (Q, \Sigma, \delta, q_0, F)$ ein NFA\\
+\\
+Sei $w = y_1y_2...y_m$, $y_i \in \Sigma{\epsilon}$\\
+\\
+Es existiere eine Folge von Zustaenden\\
+$r_0r_1r_2...r_m$, $r_i \in Q$ mit\\
+\\
+1. $r_0 = q_0$\\
+2. $r_i \in \delta(r_{i-1}, y_i)$, $1 \leqslant i \leqslant m$\\
+3. $r_m \in F$\\
+\\
+Dann \uline{akzeptiert} $N$ das Wort $w$, sonst \uline{verwirft} es\\
+\\
+$\qed$\\
+\\
+\\
+\uline{Beispiel} $N_1$ auf $010110$ (unseres Beispiel)\\
+\\
+1\ts{er} Weg\\ \tab $q_1$ \tab $q_1$ \tab $q_2$ \tab $q_3$ \tab $q_4$ \tab $q_4$ \tab $q_4$\\
+\tab\tab 0 \tab 1 \tab\:\: 0 \tab 1 \tab\:\: 1 \tab 0\\
+\\
+2\ts{er} Weg\\ \tab $q_1$ \tab $q_1$ \tab $q_1$ \tab $q_1$ \tab $q_2$ \tab $q_3$ \tab $q_4$ \tab $q_4$\\
+\tab\tab 0 \tab 1 \tab\:\: 0 \tab 1 \tab\: \textcolor{red}{$\circled{\textcolor{black}{$\epsilon$}}$} \tab 1 \tab\:\: 1\\
+\\
+\\
+\rule{\textwidth}{0.4mm}\\
+\\
+\uline{Theorem}: Jeder NFA hat einen aequivalenten DFA $\qed$\\
+\\
+\uline{Beweis}: Sei $N = (Q, \Sigma, \delta, q_0, F)$ ein NFA der $L$ erkennt\\
+Wir \uline{konstruieren} ein DFA $D = (Q', \Sigma', \delta', q_0', F')$, der ebenfalls $L$ erkennt\\
+\\
+1. $Q' = 2^Q = P(Q)$\\
+\\
+2. $\delta'(R,\alpha) = \underset{r \in R}{\scalebox{1.5}{$\cup$}}{\delta(r,\alpha)}$\\
+\tab\: $\uparrow $\\
+\tab \scalebox{0.8}{$\in Q'$}\\
+\\
+\\
 
 
 \end{document}

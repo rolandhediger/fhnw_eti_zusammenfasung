@@ -1,5 +1,6 @@
-\documentclass[18pt,a4paper]{article}
+\documentclass[18pt,a4paper]{scrreprt}
 \usepackage[utf8]{inputenc}
+\usepackage[right=2cm,left=2cm,top=2cm]{geometry}
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{amssymb}
@@ -10,6 +11,14 @@
 \definecolor{lbcolor}{rgb}{0.9,0.9,0.9}
 \usepackage{tikz}
 \usetikzlibrary{automata,positioning}
+\usetikzlibrary{arrows}
+\usetikzlibrary{trees}
+\tikzset{
+  treenode/.style = {align=center, inner sep=0pt, text centered,
+    },
+  arn_n/.style = {treenode, circle, black,  draw=black,
+    fill=white, text width=1.5em},% arbre rouge noir, noeud noir
+}
 \newcommand*\circled[1]{\tikz[baseline=(char.base)]{
             \node[shape=circle,draw,inner sep=1pt] (char) {#1};}}
 %\author{kyriakosschwarz}
@@ -24,13 +33,17 @@
 \usepackage{amsthm}
 \usepackage{ulem}
 
+\usepackage{amsmath}
+\usepackage{graphicx}
+
+%\usepackage{relsize}
+
 %PageStyle
 %\usepackage[ngerman]{babel} % deutsche Silbentrennung
 \usepackage[utf8]{inputenc} 
 \usepackage{fancyhdr, graphicx}
-\usepackage[scaled=0.92]{helvet}
+
 \usepackage{parskip}
-\usepackage[a4paper,top=2cm]{geometry}
 \setlength{\textwidth}{17cm}
 \setlength{\oddsidemargin}{-0.5cm}
 
@@ -55,6 +68,8 @@
 \newcommand{\Ral}{\Longrightarrow}
 \newcommand{\Lal}{\Longleftarrow}
 
+\newcommand{\ts}{\textsuperscript}
+
 %Mine(new)
 \newcommand{\tab}{\hspace*{2em}}
 \newcommand{\cmark}{\ding{51}}%
@@ -69,10 +84,8 @@
 	\vspace{5cm}
 	Einfuehrung in die Theoretische Informatik \\
 }
-%\author{Kyriakos Schwarz}
+\author{Kyriakos Schwarz,Roland Hediger}
 \date{HS 2014}
-
-
 
 
 
@@ -93,10 +106,10 @@
 
 % Inhalt Start
 
-\section{Erste Woche}
+\chapter{Erste Woche}
 
 
-\subsection{Sprachen}
+\section{Sprachen}
 
 Alphabet $\Sigma$: nichtleere endliche \uline{Menge} (von Zeichen)\\
 \\
@@ -227,12 +240,12 @@ $\vert M \vert =$ Anzahl Elemente von $M$\\
 \\
 \\
 \rule{\textwidth}{0.4mm}\\
-\subsection{Endliche Automaten DFA}
+\section{Endliche Automaten DFA}
 
 \uline{d}eterministic \uline{f}inite \uline{a}utomator\\
 \\
 \uline{Statisch}\\
-\begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto] 
+\begin{tikzpicture}[shorten >=1pt,node distance=3cm,on grid,auto] 
    \node[state,initial] (q_1)   {$q_1$}; 
 %   \node[state] (q_1) [above right=of q_0] {$q_1$}; 
    \node[state, accepting] (q_2) [right=of q_1] {$q_2$}; 
@@ -282,13 +295,13 @@ Liefert \uline{accept} oder \uline{fertig}\\
 \rule{\textwidth}{0.4mm}\\
 \\
  
-\section{Zweite Woche}
+\chapter{Zweite Woche}
 
 
-\subsection{DFA, NFA}
+\section{DFA, NFA}
 
 
-\begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto] 
+\begin{tikzpicture}[shorten >=1pt,node distance=3cm,on grid,auto] 
    \node[state,initial] (q_1)   {$q_1$}; 
    \node[state, accepting] (q_2) [right=of q_1] {$q_2$}; 
    \node[state](q_3) [right=of q_2] {$q_3$};
@@ -320,10 +333,251 @@ Sei $M = (Q, \Sigma, \delta, q_0, F)$ ein DFA\\
 \\
 Sei $w = x_1x_2x_3...x_m$ ein Wort ueber $\Sigma$ mit $x_i \in \Sigma$, $n \geqslant 0$ $[n=0 \rightarrow w = \epsilon]$\\
 \\
+\\
+$M$ akzeptiert $w$, wenn eine Folge von Zustaenden existiert $r_0, r_1, r_2, ... , r_n$, mit:\\
+\\
+1. $r_0 = q_0$\\
+2. $r_i = \delta(r_{i-1}, x_i), i \in \{1...m\}$\\
+3. $r_n \in F$\\
+\\
+Sonst wird $w$ \uline{verworfen}\\
+\\
+\uline{accept} / \uline{reject}\\
+\\
+$\qed$\\
+\\
+\\
+\rule{\textwidth}{0.4mm}\\
+\\
+\\
+\begin{tabular}{|p{10cm}}
+$M$ \uline{erkennt} Sprache $L$ falls\\
+\\
+$L = \{w \in \Sigma^{*} \:\vert\: M$ akzeptiert $w\}$\\
+\end{tabular}
+\\
+\\
+\\
+\\
+\begin{tabular}{|p{10cm}}
+Eine Sprache heisst \uline{regulaer}, wenn ein\\
+\\
+\uline{DFA} existiert, der die Sprache erkennt\\ 
+\end{tabular}
+\\
+\\
+\\
+\\
+Automat $\rightarrow$ \uline{akzeptiert} / \uline{verwirft} \uline{Wort}\\
+\tab $\searrow$\\
+\tab \uline{erkennt} \uline{Sprache}\\
+\tab\tab $\uparrow$\\
+\tab \uline{recognise}
+\\
+\\
+\rule{\textwidth}{0.4mm}\\
+\\
+$M_2:$ \tab $\Sigma = \{0,1\}$\\
+\\
+\begin{tikzpicture}[shorten >=1pt,node distance=3cm,on grid,auto] 
+   \node[state,initial] (q_0)   {$q_0$}; 
+    \path[->] 
+    (q_0)  edge [loop below] node {0,1} (); 
+\end{tikzpicture}
+\\
+\\
+akzeptiert \uline{kein} Wort\\
+\\
+erkennt $\emptyset$\\
+\\
+\\
+\rule{\textwidth}{0.4mm}\\
+\\
+$M_3:$ \tab $\Sigma = \{0,1\}$\\
+\\
+\begin{tikzpicture}[shorten >=1pt,node distance=3cm,on grid,auto] 
+   \node[state,initial, accepting] (q_0)   {$q_0$}; 
+    \path[->] 
+    (q_0)  edge [loop below] node {0,1} (); 
+\end{tikzpicture}
+\\
+\\
+akzeptiert \uline{jedes} Wort\\
+\\
+erkennt $\Sigma^{*}$\\
+\\
+\\
+\rule{\textwidth}{0.4mm}\\
+\\
+Zwei DFA heissen \uline{aequivalent}, wenn sie\\
+dieselbe Sprachen erkennen\\
+\\
+\\
+\uline{NFA}: nichtdeterministischer FA\\
+\\
+\\
+$N_1:$ \tab $\Sigma = \{0,1\}$\\
+\\
+\\
+\begin{tikzpicture}[shorten >=1pt,node distance=3cm,on grid,auto] 
+   \node[state,initial] (q_1)   {$q_1$}; 
+%   \node[state] (q_1) [above right=of q_0] {$q_1$}; 
+   \node[state] (q_2) [right=of q_1] {$q_2$}; 
+   \node[state](q_3) [right=of q_2] {$q_3$};
+   \node[state, accepting] (q_4) [right=of q_3] {$q_4$}; 
+    \path[->] 
+%    (q_1) edge  node {0} (q_1)
+%          edge  node [swap] {1} (q_2)
+    (q_1) edge  node [swap] {1} (q_2)
+          edge [loop above] node {0,1} ()
+    (q_2) edge node [swap] {0, \textcolor{red}{$\circled{\textcolor{black}{$\epsilon$}}$}} (q_3)
+%          edge [loop above] node {1} ()      
+    (q_3) edge node [swap] {1} (q_4) 
+%          edge [loop below] node {1} ();
+    (q_4) edge [loop above] node {0,1} ();
+\end{tikzpicture}
+\\
+\\
+Eingabe: $010110$\\
+\\
+\newpage
+\textbf{Verarbeitung:}
+
+\begin{tikzpicture}[->,>=stealth',level/.style={sibling distance = 15cm/#1,
+  level distance = 2.5cm}]
+\node [arn_n](Root) {$q_1$}   
+child{node [arn_n] {$q_1$}
+child{node [arn_n](q_1){$q_1$} 
+	child {node [arn_n](q_10){$q_1$} 
+		child{node [arn_n] (q_11) {$q_1$} 
+			child{node [arn_n] (q_111) {$q_1$} 
+				child{node [arn_n] (q_1110) [below = of q_111] {$q_1$} edge from parent node[right]{0}}		
+			edge from parent node[left]{1}}
+			child{node [arn_n] (q_1122) {$q_2$}
+			child {node [arn_n] (q11220) [below = of q_1122] {$q_3$}edge from parent node[right]{0}}
+			child {node [arn_n] (q_1123)[right= of q_1122]{$q_3$}
+			edge from parent node[above]{$\epsilon$}}
+			edge from parent node[left]{1}}	
+			child{node [arn_n] (q_113) {$q_3$} edge from parent node[right]{1}}			
+		edge from parent node[left]{1}}
+		child{node [arn_n] (q_112) {$q_2$} 
+			child{node [arn_n] (q_212) [right=of q_112] {$q_3$}
+            child{ node [arn_n] {$q_4$} 
+				child{ node [arn_n]{$q_4$} edge from parent node[right]{0}}            
+            edge from parent node[right]{1}}			
+			 edge from parent node[above]{$\epsilon$} }		
+		edge from parent node[right]{1}}	
+edge from parent node[left]{0}}
+ edge from parent node[left] {1}
+}
+child{node [arn_n](q_2){$q_2$} 
+	child{ node [arn_n](q_20)[below=of q_2] {$q_3$}
+	child{ node [arn_n](q_41){$q_4$}
+    	child{node [arn_n](q_411){$q_4$}
+			child{node [arn_n] (q_4111){$q_4$} edge from parent node[right]{0}}    	
+    	 edge from parent node[right]{1}}	
+	 edge from parent node[right]{1}}	
+	 edge from parent node[right]{0}}
+	child{ node [arn_n](q_3) [right=of q_2] {$q_3$} edge from parent node[above]{$\epsilon$}}edge from parent node[right]{1}} edge from parent node[left] {0}}
+;
+%Extra todo :http://tex.stackexchange.com/questions/63612/tikz-tree-drawing-with-comments-to-each-level
+\end{tikzpicture}
+\\
+\\
+\rule{\textwidth}{0.4mm}\\
+\newpage
+
+%\begin{tabular}{|p{10cm}}
+\uline{Def:} \: $P = P(Q) = 2^Q =$ \uline{Potenzmenge} \\
+ist Menge aller Teilmengen von $Q$ \\
+\\
+$\Sigma_{\epsilon} = \Sigma \cup \{\epsilon\}$\\
+%\end{tabular}
+\\
+\\
+\\
+\\
+\uline{Def}  \uline{DFA} : Ein NFA ist ein 5-Tupel $(Q, \Sigma, \delta, q_0, F)$ mit:\\
+\\
+1. $Q$ ist eine endliche nichtleere Menge von Zustaenden\\
+\\
+2. $\Sigma$ ist das \uline{Eingabealphabet} (z.B. $1101$)\\
+\\
+3. $\delta : Q \times \Sigma_{\textcolor{red}{\epsilon}} \rightarrow^{total} P(Q)$\\
+\tab \uline{Transitionsfunktion}\\
+\\
+4. $q_0 \in Q$ Startzustand\\
+\\
+5. $F \subseteq Q$ Menge der akzeptierende Zustaende\\
+\\
+\\
+\rule{\textwidth}{0.4mm}\\
+\\
+
+\chapter{Dritte Woche}
 
 
+\section{NFA}
 
-
+\begin{tikzpicture}[shorten >=1pt,node distance=3cm,on grid,auto] 
+   \node[state,initial] (q_1)   {$q_1$}; 
+%   \node[state] (q_1) [above right=of q_0] {$q_1$}; 
+   \node[state] (q_2) [right=of q_1] {$q_2$}; 
+   \node[state](q_3) [right=of q_2] {$q_3$};
+   \node[state, accepting] (q_4) [right=of q_3] {$q_4$}; 
+    \path[->] 
+%    (q_1) edge  node {0} (q_1)
+%          edge  node [swap] {1} (q_2)
+    (q_1) edge  node [swap] {1} (q_2)
+          edge [loop above] node {0,1} ()
+    (q_2) edge node [swap] {0, \textcolor{red}{$\circled{\textcolor{black}{$\epsilon$}}$}} (q_3)
+%          edge [loop above] node {1} ()      
+    (q_3) edge node [swap] {1} (q_4) 
+%          edge [loop below] node {1} ();
+    (q_4) edge [loop above] node {0,1} ();
+\end{tikzpicture}
+\\
+\\
+\uline{Berechnung NFA}\\
+\\
+Sei $N = (Q, \Sigma, \delta, q_0, F)$ ein NFA\\
+\\
+Sei $w = y_1y_2...y_m$, $y_i \in \Sigma{\epsilon}$\\
+\\
+Es existiere eine Folge von Zustaenden\\
+$r_0r_1r_2...r_m$, $r_i \in Q$ mit\\
+\\
+1. $r_0 = q_0$\\
+2. $r_i \in \delta(r_{i-1}, y_i)$, $1 \leqslant i \leqslant m$\\
+3. $r_m \in F$\\
+\\
+Dann \uline{akzeptiert} $N$ das Wort $w$, sonst \uline{verwirft} es\\
+\\
+$\qed$\\
+\\
+\\
+\uline{Beispiel} $N_1$ auf $010110$ (unseres Beispiel)\\
+\\
+1\ts{er} Weg\\ \tab $q_1$ \tab $q_1$ \tab $q_2$ \tab $q_3$ \tab $q_4$ \tab $q_4$ \tab $q_4$\\
+\tab\tab 0 \tab 1 \tab\:\: 0 \tab 1 \tab\:\: 1 \tab 0\\
+\\
+2\ts{er} Weg\\ \tab $q_1$ \tab $q_1$ \tab $q_1$ \tab $q_1$ \tab $q_2$ \tab $q_3$ \tab $q_4$ \tab $q_4$\\
+\tab\tab 0 \tab 1 \tab\:\: 0 \tab 1 \tab\: \textcolor{red}{$\circled{\textcolor{black}{$\epsilon$}}$} \tab 1 \tab\:\: 1\\
+\\
+\\
+\rule{\textwidth}{0.4mm}\\
+\\
+\uline{Theorem}: Jeder NFA hat einen aequivalenten DFA $\qed$\\
+\\
+\uline{Beweis}: Sei $N = (Q, \Sigma, \delta, q_0, F)$ ein NFA der $L$ erkennt\\
+Wir \uline{konstruieren} ein DFA $D = (Q', \Sigma', \delta', q_0', F')$, der ebenfalls $L$ erkennt\\
+\\
+1. $Q' = 2^Q = P(Q)$\\
+\\
+2. $\delta'(R,\alpha) = \underset{r \in R}{\scalebox{1.5}{$\cup$}}{\delta(r,\alpha)}$\\
+\tab\: $\uparrow $\\
+\tab \scalebox{0.8}{$\in Q'$}\\
+\\
 
 
 \end{document}
