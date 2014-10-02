@@ -556,7 +556,7 @@ Dann \uline{akzeptiert} $N$ das Wort $w$, sonst \uline{verwirft} es\\
 $\qed$\\
 \\
 \\
-\uline{Beispiel} $N_1$ auf $010110$ (unseres Beispiel)\\
+\uline{Beispiel} \tab $N_1$ auf $010110$ (unseres Beispiel)\\
 \\
 1\ts{er} Weg\\ \tab $q_1$ \tab $q_1$ \tab $q_2$ \tab $q_3$ \tab $q_4$ \tab $q_4$ \tab $q_4$\\
 \tab\tab 0 \tab 1 \tab\:\: 0 \tab 1 \tab\:\: 1 \tab 0\\
@@ -579,6 +579,86 @@ Wir \uline{konstruieren} ein DFA $D = (Q', \Sigma', \delta', q_0', F')$, der ebe
 \tab \scalebox{0.8}{$\in Q'$}\\
 \\
 \\
+Sei $E(R) = \{ q \in Q \:\vert\: q$ kann von $R$ aus durch $\epsilon$-Trans erreicht werden$\}$\\
+\\
+3. $q_0' = E(\{q_0\})$\\
+\\
+4. $F' = \{ R \in Q' \:\vert\: R \cap F \neq \emptyset \}$\\
+\\
+$\qed$\\
+\\
+\\
+\rule{\textwidth}{0.4mm}\\
+\\
+\uline{Uebung}\\
+
+\begin{tikzpicture}[shorten >=1pt,node distance=3cm,on grid,auto] 
+   \node[state,initial, accepting] (q_1)   {$q_1$}; 
+   \node[state] (q_2) [below left=of q_1] {$q_2$}; 
+   \node[state] (q_3) [below right=of q_1] {$q_3$}; 
+   %\node[state,accepting](q_3) [below right=of q_1] {$q_3$};
+    \path[->] 
+    (q_1) edge  node [swap] {$\beta$} (q_2)
+          edge [bend right=40] node {$\epsilon$} (q_3)
+    (q_2) edge  node [swap]  {$\alpha$, $\beta$} (q_3)
+          edge [loop below] node {$\alpha$} ()
+    (q_3) edge [bend right=40] node {$\alpha$} (q_1); 
+\end{tikzpicture} 
+\\
+\\
+$Q = \{q_1,q_2,q_3\}$\\
+$\Sigma = \{\alpha, \beta\}$\\
+$\delta = \{ \delta(q_1,\beta) = q_2$,\\
+\tab\: $\delta(q_1,\epsilon) = q_3$\\
+\tab\: $\delta(q_2,\alpha) = q_2$\\
+\tab\: $\delta(q_2,\alpha) = q_3$\\
+\tab\: $\delta(q_2,\beta) = q_3$\\
+\tab\: $\delta(q_3,\alpha) = q_1 \}$\\
+$q_0 = q_1$\\
+$F = \{q_1\}$\\
+\\
+\\
+$\rightarrow$ DFA\\
+\\
+1. $Q' = P(Q) = \{\{\}, \{q_1\}, \{q_2\}, \{q_3\}, \{q_1,q_2\},$\\
+\tab \tab \tab \tab $\{q_1,q_3\}, \{q_2,q_3\}, \{q_1,q_2,q_3\}\}$\\
+\\
+2. $\delta'$: \\
+\begin{tabular}{ l | l | l }                       
+   & $\alpha$ & $\beta$ \\
+  \hline
+  $\{\}$ & $\{\}$ & $\{\}$ \\
+  $\{q_1\}$ & $\{\}$ & $\{q_2\}$ \\
+  $\{q_2\}$ & $\{q_2,q_3\}$ & $\{q_3\}$ \\
+  $\{q_3\}$ & $\{q_1,q_3\}$ & $\{\}$ \\
+  $\{q_1,q_2\}$ & $\{q_2,q_3\}$ & $\{q_2,q_3\}$ \\
+  $\{q_1,q_3\}$ & $\{q_1,q_3\}$ & $\{q_2\}$ \\
+  $\{q_2,q_3\}$ & $\{q_1,q_2,q_3\}$ & $\{q_3\}$ \\
+  $\{q_1,q_2,q_3\}$ & $\{q_1,q_2,q_3\}$ & $\{q_2,q_3\}$ \\
+\end{tabular}
+\\
+\\
+\\
+3. $q_0' = E(\{q_0\}) = E(\{q_1\}) = \{q_1,q_3\}$\\
+\\
+4. $F' = \{\{q_1\}, \{q_1,q_2\}, \{q_1, q_3\}, \{q_1, q_2, q_3\}\}$\\
+\\
+\\
+\rule{\textwidth}{0.4mm}\\
+\\
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 \end{document}
