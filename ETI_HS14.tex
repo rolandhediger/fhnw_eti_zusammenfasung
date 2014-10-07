@@ -647,15 +647,136 @@ $\rightarrow$ DFA\\
 \rule{\textwidth}{0.4mm}\\
 \\
 
+\chapter{Vierte Woche}
 
 
+\section{Abgeschlossenheit}
 
+\uline{Abgeschlossenheit}\\
+\\
+$a,b \in \mathbb{N}$, $a+b \in \mathbb{N}$\\
+\tab $a-b \not\in \mathbb{N}$\\
+\tab \tab \:\: $\uparrow$\\
+\tab \tab \:\: im Allgemeinem\\
+\\
+\\
+\uline{Def}\\
+\\
+Eine Menge $M$ heisst \uline{abgeschlossen} unter einer\\
+Operation $\circ$, wenn $a \circ b \in M$ fuer alle $a,b \in M$\\
+\\
+$\qed$\\
+\\
+\\
+\uline{Satz}\\
+\\
+Die Menge der \uline{raeguleren} Sprachen ist abgeschlossen unter\\ 
+Vereinigung, Konkatenation und Kleenescher Stern\\
+\\
+$\qed$\\
+\\
+\\
+$\scalebox{1.5}{$\cup$}$ Vereinigung\\
+\\
+1. Schon gezeigt durch DFAs\\
+2. Nun mit NFAs:\\
+\\
+$<$skitze$>$\\
+\\
+$N_1$ erkennt $L_1$\\
+$N_2$ erkennt $L_2$\\
+$N$ erkennt $L_1 \cup L_2$\\
+\\
+\\
+\uline{Konkatenation}\\
+\\
+$L_1, L_2$ regulaer, dann $L_1 \cdot L_2$ regulaer\\
+\\
+$<$skitze$>$\\
+\\
+\\
+\uline{Kleen'scher Stern}\\
+\\
+$L$ regulaer, dann $L^*$ regulaer\\
+\\
+$<$skitze$>$\\
+\\
+$N$ erkennt $L^*$\\
+\\
+\\
+\rule{\textwidth}{0.4mm}\\
+\\
 
+\section{RE}
 
+\uline{Raegulere Ausdruecke} (RE)\\
+\\
+REs: Spezifikation\\
+DFA / NFAs: Implementation\\
+\\
+Arithmetischer Ausdruck: "$(5+3)*4$" \: : String\\
+\tab \tab  \tab \tab \tab \tab \tab $32$ \tab\:\: : $\mathbb{N}$\\
+\\
+Bedeutung von String ist $\mathbb{N}$\\
+\\
+\\
+RE: "$(0 \cup 1) \cdot 0^*$" : String\\
+\tab\: $\{0\}$ $\{1\}$ $\{0\}$\\
+\tab\: $\{0,1\}$ $\{\epsilon, 0, 00, 000, ...\}$\\
+\tab\: $\{0, 00, 000, ... , 1, 10, 100, ... \}$\\
+\\
+Bedeutung von String ist Sprache\\
+\\
+\\
+\rule{\textwidth}{0.4mm}\\
+\\
 
-
-
-
+\uline{Syntax und Semantik von REs}\\
+\\
+\begin{tabular}{ r | l | l }                       
+   & RE Syntax & L(RE) Semantik \\
+  \hline
+  1. & $a$ fuer $a \in \Sigma$ & $\{a\}$ \\
+  2. & $\epsilon$ & $\{\epsilon\}$ \\
+  3. & $\emptyset$ & $\emptyset$ \\
+  4. & $(R_1 \cup R_2)$ & $L(R_1) \cup L(R_2)$ \\
+  5. & $(R_1 \circ R_2)$ & $L(R_1) \cdot L(R_2)$ \\
+  6. & $(R^*)$ & $(L(R))^*$ \\
+\end{tabular}
+\\
+\\
+\\
+$6.$ (Hoch) $\xrightarrow{Praezidenzen}$ (Niedrig) $1.$\\
+\\
+\\
+z.B.: $a \cdot b \cup c$\\
+\\
+bedeutet\\
+$(a \cdot b) \cup c$\\
+\\
+und \uline{nicht}\\
+$a \cdot (b \cup c)$\\
+\\
+\\
+\uline{Zucker} (Es kann nichts neues)\\
+\\
+$R^+ = R \circ R^*$\\
+\\
+also\\
+\\
+$R^* = R^+ \cup \epsilon$\\
+\\
+\\
+$\Sigma = c_1 \cup c_2 \cup ... \cup c_n$ mit $c_i \in \Sigma$\\
+\\
+\\
+\uline{Beispiele}\\
+\\
+a) "$(0 \cup 1)^* 0 1$" bezeichnet alle Woerter, die mit $01$ enden\\
+\\
+\\
+\rule{\textwidth}{0.4mm}\\
+\\
 
 
 
