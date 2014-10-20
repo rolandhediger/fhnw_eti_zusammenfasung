@@ -809,19 +809,19 @@ Sei $ s = s_1 \hdots s_n \in L$ mit $ s_i \in \Sigma $ und $ n \ge p$\\
 Sei $r_1,r_2 \hdots r_{n+1}$ die Folge der Zustände die M durchläuft um $s$ zu akzeptieren.\\
 $ s = s_1 \downarrow_{r_1} \hdots \downarrow_{r_n}  s_n \downarrow_{r_{n+1} \in F}$
 
-Länge $n+1 \ge p+1, n+1 > p$\\
+Länge $n+1 \ge p+1$, d.h. $n+1 > p$\\
 
-Da $M$ $p$ Zustände hat muss \textbf{mindestens ein Zustand zweimal unter dem erstem p+1 Zuständen vorkommen /durchgelaufen werden} (Eigenschaften des DFA - jedes Zeichen des Alphabet muss durch jeder Zustand verarbeitet werden)\\
+Da $M$ $p$ Zustände hat muss \textbf{(mindestens) ein Zustand (mindestens) zweimal unter den ersten $p+1$ Zuständen vorkommen /durchgelaufen werden} (Eigenschaften des DFA - jedes Zeichen des Alphabet muss durch jeder Zustand verarbeitet werden)\\
 
 \textbf{Pidgeonhole Prinzip:}\\
-Beziechne $r_j$ das erste Auftreten eines sollchen Zustandes (Zustände paarweise verschieden bis zum gewissen Punkt). $r_l$ das zweite Auftreten des Zuständes $l>j$\\
+Beziechne $r_j$ das erste Auftreten eines solchen Zustandes (Zustände paarweise verschieden bis zum gewissen Punkt). $r_l$ das zweite Auftreten des Zuständes $l>j$\\
 \newpage
 (Diagram hier)\\
 
 Aus dem Pidgeonholeprinzip folgt dass $ l \le p+1$ : \\
 \begin{enumerate}
 \item $ M$ akzeptiert $xy^iz , i \ge 0$\\
-\item Zwischen $r_j,r_l$ mind 1 Zeichen) $ l \neq j |y| \ge 1$ \\
+\item (Zwischen $r_j,r_l$ mind. 1 Zeichen) $ l \neq j$, also $|y| \ge 1$ \\
 \item $|xy| = l-1 \le (p+1)-1=p$\\ 
 \end{enumerate}
 $\qed$\\
