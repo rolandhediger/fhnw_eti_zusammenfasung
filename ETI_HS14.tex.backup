@@ -670,8 +670,8 @@ $\qed$\\
 \\
 \uline{Satz}\\
 \\
-Die Menge der \uline{raeguleren} Sprachen ist abgeschlossen unter Vereinigung,\\
-Konkatenation und Kleenescher Stern\\
+Die Menge der \uline{raeguleren} Sprachen ist abgeschlossen unter\\ 
+Vereinigung, Konkatenation und Kleenescher Stern\\
 \\
 $\qed$\\
 \\
@@ -715,7 +715,176 @@ REs: Spezifikation\\
 DFA / NFAs: Implementation\\
 \\
 Arithmetischer Ausdruck: "$(5+3)*4$" \: : String\\
-\tab \tab  \tab \tab \tab \tab \tab $32$ \tab\:\: : $\mathbb{N}$
+\tab \tab  \tab \tab \tab \tab \tab $32$ \tab\:\: : $\mathbb{N}$\\
+\\
+Bedeutung von String ist $\mathbb{N}$\\
+\\
+\\
+RE: "$(0 \cup 1) \cdot 0^*$" : String\\
+\tab\: $\{0\}$ $\{1\}$ $\{0\}$\\
+\tab\: $\{0,1\}$ $\{\epsilon, 0, 00, 000, ...\}$\\
+\tab\: $\{0, 00, 000, ... , 1, 10, 100, ... \}$\\
+\\
+Bedeutung von String ist Sprache\\
+\\
+\\
+\rule{\textwidth}{0.4mm}\\
+\\
+
+\uline{Syntax und Semantik von REs}\\
+\\
+\begin{tabular}{ r | l | l }                       
+   & RE Syntax & L(RE) Semantik \\
+  \hline
+  1. & $a$ fuer $a \in \Sigma$ & $\{a\}$ \\
+  2. & $\epsilon$ & $\{\epsilon\}$ \\
+  3. & $\emptyset$ & $\emptyset$ \\
+  4. & $(R_1 \cup R_2)$ & $L(R_1) \cup L(R_2)$ \\
+  5. & $(R_1 \circ R_2)$ & $L(R_1) \cdot L(R_2)$ \\
+  6. & $(R^*)$ & $(L(R))^*$ \\
+\end{tabular}
+\\
+\\
+\\
+$6.$ (Hoch) $\xrightarrow{Praezidenzen}$ (Niedrig) $1.$\\
+\\
+\\
+z.B.: $a \cdot b \cup c$\\
+\\
+bedeutet\\
+$(a \cdot b) \cup c$\\
+\\
+und \uline{nicht}\\
+$a \cdot (b \cup c)$\\
+\\
+\\
+\uline{Zucker} (Es kann nichts neues)\\
+\\
+$R^+ = R \circ R^*$\\
+\\
+also\\
+\\
+$R^* = R^+ \cup \epsilon$\\
+\\
+\\
+$\Sigma = c_1 \cup c_2 \cup ... \cup c_n$ mit $c_i \in \Sigma$\\
+\\
+\\
+\uline{Beispiele}\\
+\\
+a) "$(0 \cup 1)^* 0 1$" bezeichnet alle Woerter, die mit $01$ enden\\
+\\
+\\
+\rule{\textwidth}{0.4mm}\\
+\\
+
+\chapter{Funfte Woche}
+\section{Pumping Lemma}
+
+
+$\{0^n 1^n | n \ge 0\}$ nicht Regulär\\\\
+\uline{Pumping Lemma:}\\
+\\
+Sei L eine Reguläre Sprache über $\Sigma$\\
+Dann existiert eine Zahl $p \in N$ (Pumping Länge) mit:\\
+Jedes Wort $s \in L$ mit $|s| \ge p$ lässt sich schreiben als:\\
+$s = x y z$ wobei $x,y,z \in \Sigma^*$ mit folgenden eigenschaften:\\
+\begin{enumerate}
+ \item (Aufpumpen) $x y^i z \in L$ für alle $ i \ge 0$
+ \item $|y| \ge 1$
+ \item $|xy| \le p$
+\end{enumerate}
+
+Für jedes Wort existiert eine Zerlegung.\\
+Logische Struktur : $\{\exists p | \forall s \in L | \exists x,y,z | 1)2)3)\}$
+\newpage
+\uline{Beweis:}\\
+\\
+Sei M ein DFA das L erkennt, $M = \{Q,\Sigma,\delta,q_0,F\}$\\
+\\
+Sei p die Anzahl Zustände : $p = |Q|$\\
+\\
+Sei $ s = s_1 \hdots s_n \in L$ mit $ s_i \in \Sigma $ und $ n \ge p$\\
+\\
+Sei $r_1,r_2 \hdots r_{n+1}$ die Folge der Zustände die M durchläuft um $s$ zu akzeptieren.\\
+$ s = s_1 \downarrow_{r_1} \hdots \downarrow_{r_n}  s_n \downarrow_{r_{n+1} \in F}$
+
+Länge $n+1 \ge p+1$, d.h. $n+1 > p$\\
+
+Da $M$ $p$ Zustände hat muss \textbf{(mindestens) ein Zustand (mindestens) zweimal unter den ersten $p+1$ Zuständen vorkommen /durchgelaufen werden} (Eigenschaften des DFA - jedes Zeichen des Alphabet muss durch jeder Zustand verarbeitet werden)\\
+
+\textbf{Pidgeonhole Prinzip:}\\
+Beziechne $r_j$ das erste Auftreten eines solchen Zustandes (Zustände paarweise verschieden bis zum gewissen Punkt). $r_l$ das zweite Auftreten des Zuständes $l>j$\\
+\newpage
+(Diagram hier)\\
+
+Aus dem Pidgeonholeprinzip folgt dass $ l \le p+1$ : \\
+\begin{enumerate}
+\item $ M$ akzeptiert $xy^iz , i \ge 0$\\
+\item (Zwischen $r_j,r_l$ mind. 1 Zeichen) $ l \neq j$, also $|y| \ge 1$ \\
+\item $|xy| = l-1 \le (p+1)-1=p$\\ 
+\end{enumerate}
+$\qed$\\
+\rule{\textwidth}{0.4mm}\\
+\\
+\uline{Beispiel:}\\
+$ \{0^n1^n | n \ge 0\} = L_1 $\\
+\\
+Sei $L_1$ Regulär dann existiert ein $p$ (Pumping Lemma). \\
+\\
+Betrachte $s = 0^p 1^p \in L$ :\\
+Dann lässt sich $s$ schreiben als $s = xyz$ mit der Eigenschaft: \
+$s = xyz, x,y^iz \in L, |y| \ge 1$ \\
+\begin{enumerate}
+\item $y$ besteht nur aus Nullen : $xyyz \notin L$\\
+\item $y$ besteht nur aus Einsen $xyyz \notin L$ \\
+\item $y$ besteht aus Nullen und Einsen $\rightarrow xyyz :$ (Riehenfolge ist falsch)
+\end{enumerate}
+Wiederspruch in jedem Fall  $ \rightarrow$ $L_1$ nicht regulär
+\\
+\\
+\rule{\textwidth}{0.4mm}\\
+\\
+
+\chapter{Sechste Woche}
+\section{Grammatiken}
+
+
+\uline{while} $m \neq n$ \uline{do}\\
+\tab \uline{if} $m > n$ \uline{then}\\
+\tab \tab $m := m-n$\\
+\tab \uline{else}\\
+\tab \tab $n := n-m$\\
+\tab \uline{endif}\\
+\uline{endwhile}\\
+\\
+$\Sigma = \{ \uline{while}, \uline{do}, ident, ... \}$\\
+\\
+\\
+cmd $::=$ AssiCmd\\
+cmd $::=$ IfCmd\\
+cmd $::=$ WhileCmd\\
+\\
+WhileCmd $::=$ \uline{while} expr \uline{do} cmd \uline{endwhile}\\
+IfCmd \tab $::=$ \uline{if} expr \uline{then} cmd \uline{else} cmd \uline{endif}\\
+IfCmd \tab $::=$ \uline{if} expr \uline{then} cmd \uline{endif}\\
+AssiCmd \:\: $::=$ \uline{ident} $:=$ expr\\
+expr \tab\:\: $::=$ ...\\
+\\
+IfCmd \: $::=$ \uline{if} expr \uline{then} cmd optElse \uline{endif}\\
+optElse $::=$ $\epsilon$\\
+optElse $::=$ \uline{else} cmd\\
+\\
+\\
+\rule{\textwidth}{0.4mm}\\
+\\
+\framebox[1.5\width]{\textcolor{red}{\uline{\textcolor{black}{IfCmd}}} $::=$ \uline{if} \textcolor{red}{\uline{\textcolor{black}{expr}}} \uline{then} \textcolor{red}{\uline{\textcolor{black}{cmd}}} \uline{endif}} \tab Produktion
+
+
+
+
+
+
 
 
 
