@@ -891,7 +891,65 @@ terminal Symbole\\
 \textcolor{red}{\uline{\textcolor{black}{Subjekt}}} $::=$ \textcolor{green}{\uline{\textcolor{black}{Katze}}}\\
 \textcolor{red}{\uline{\textcolor{black}{Objekt}}} $::=$ \textcolor{red}{\uline{\textcolor{black}{Subjekt}}}\\
 \textcolor{red}{\uline{\textcolor{black}{Praedikat}}} $::=$ \textcolor{green}{\uline{\textcolor{black}{frisst}}}\\
-
+\\
+\\
+Satz\\
+$\Rightarrow$ Subjekt Praedikat Objekt \uline{.}\\
+\\
+$\Rightarrow$ \uline{Vogel} Praedikat Objekt \uline{.}\\
+\\
+$\Rightarrow$ \uline{Vogel} Praedikat Subjekt \uline{.}\\
+\\
+$\Rightarrow$ \uline{Vogel} Praedikat \uline{Katze} \uline{.}\\
+\\
+$\Rightarrow$ \uline{Vogel} \uline{frisst} \uline{Katze} \uline{.}\\
+\\
+\\
+\rule{\textwidth}{0.4mm}\\
+\\
+Eine \uline{Kontextfreie Grammatik} ist ein 4-Tuple $(V, \Sigma, R, S)$ mit\\
+\\
+1. $V:$ Alphabet der NTS (\uline{n}icht-\uline{t}erminal \uline{s}ymbole)\\
+\\
+2. $\Sigma:$ Alphabet der TS (\uline{t}erminal \uline{s}ymbole)\\
+\\
+3. $R:$ endliche Menge von \uline{Produktionen}\\
+\tab Produktion $\in V \times (V \cup \Sigma)^*$\\
+\\
+4. $S \in V:$ Startsymbol\\
+\\
+\\
+\rule{\textwidth}{0.4mm}\\
+\\
+\uline{Herleitung, Sprache}\\
+\\
+Seien $u, v, w \in (V \cup \Sigma)^*$, $A \xrightarrow{::=} w \in R$\\
+\\
+Dann\:\: $uAv \Rightarrow uwv$\\
+\tab\tab $\downarrow$\\
+\tab "leitet her"\\
+\\
+$u$ leitet $v$ her, $u \Rightarrow^{*} v$, falls $u=v$\\
+\\
+oder es gibt eine Folge\\
+\\
+$u \Rightarrow u_1 \Rightarrow u_2 \Rightarrow ... \Rightarrow u_k \Rightarrow v$\\
+\\
+Sei $G = (V, \Sigma, R, S)$\\
+\\
+Dann ist\\
+\\
+\begin{tabular}{|p{10cm}}
+\begin{tabular}{|p{10cm}}
+\begin{tabular}{|p{10cm}}
+$L(G) = \{ w \in \Sigma^* \:\vert\: S \Rightarrow^* w\}$
+\end{tabular}
+\end{tabular}
+\end{tabular}
+\\
+\\
+\rule{\textwidth}{0.4mm}\\
+\\
 
 
 
