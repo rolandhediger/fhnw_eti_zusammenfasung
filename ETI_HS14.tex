@@ -24,7 +24,9 @@
 %\author{kyriakosschwarz}
 \title{Einfuehrung in die Theoretische Informatik}
 
-
+\newenvironment{rcases}
+  {\left.\begin{aligned}}
+  {\end{aligned}\right\rbrace}
 
 %Math
 \usepackage{amsmath}
@@ -132,7 +134,7 @@ Haskell: $++$\tab $""$ ($\epsilon$)\\
 \\
 \\
 \uline{Monoid}: Sei $M$ eine Menge und\\
-\tab $\circ : M \times M \rightarrow^{total} M$ eine Verknuepfung\\
+\tab $\circ : M \times M \xrightarrow{total} M$ eine Verknuepfung\\
 \\
 Das Paar $(M, \circ)$ heisst ein \uline{Monoid}, falls gilt:\\
 \\
@@ -284,7 +286,7 @@ Liefert \uline{accept} oder \uline{fertig}\\
 \\
 2. $\Sigma$ ist das \uline{Eingabealphabet} (z.B. $1101$)\\
 \\
-3. $\delta : Q \times \Sigma \rightarrow^{total} Q$\\
+3. $\delta : Q \times \Sigma \xrightarrow{total} Q$\\
 \tab \uline{Transitionsfunktion}\\
 \\
 4. $q_0$ Startzustand\\
@@ -503,7 +505,7 @@ $\Sigma_{\epsilon} = \Sigma \cup \{\epsilon\}$\\
 \\
 2. $\Sigma$ ist das \uline{Eingabealphabet} (z.B. $1101$)\\
 \\
-3. $\delta : Q \times \Sigma_{\textcolor{red}{\epsilon}} \rightarrow^{total} P(Q)$\\
+3. $\delta : Q \times \Sigma_{\textcolor{red}{\epsilon}} \xrightarrow{total} P(Q)$\\
 \tab \uline{Transitionsfunktion}\\
 \\
 4. $q_0 \in Q$ Startzustand\\
@@ -972,6 +974,63 @@ $= \{\#, 0\#1, 00\#11, 000\#111, ...\}$
 \rule{\textwidth}{0.4mm}\\
 \\
 
+\chapter{Siebte Woche}
+\section{Turing Maschinen}
+
+\uline{Satz}\\
+\\
+Jede regulaere Sprache ist Kontextfrei\\
+\\
+$\qed$\\
+\\
+\\
+\uline{Beweis-Idee}\\
+\\
+\uline{DFA:}\\
+\\
+$<$skitze$>$\\
+\\
+$R_1 \rightarrow 0R_1 \:\vert\: 1R_2$\\ 
+$R_2 \rightarrow 0R_3 \:\vert\: 1R_2 \:\vert\: \epsilon$\\
+$R_3 \rightarrow 0R_2 \:\vert\: 1R_2$\\
+\\
+\rule{\textwidth}{0.4mm}\\
+\\
+$\overline{L} = \Sigma^* - L$\\
+\\
+\rule{\textwidth}{0.4mm}\\
+\\
+$<$skitze$>$\\
+\\
+\uline{Turing Maschine}\\
+\\
+Alan Turing (1912 - 1954)\\
+$\hookrightarrow$ ACM Turing Award\\
+\\
+$<$skitze$>$\\
+\\
+\\
+\uline{Turing-Maschine} 7-Tupel\\
+\\
+$(Q, \Sigma, \Gamma, \delta, q_0, q_{acc}, q_{rej})$\\
+\\
+1. $Q:$ endliche Menge von Zustaenden\\
+\tab $|Q| \geq 2$ (mind. $acc$ und $rej$)\\
+\\
+2. $\Sigma:$ Eingabealphabet, Blank $\textvisiblespace \not \in \Sigma$ (gehoert nicht zur Eingabe)\\
+\\
+3. $\Gamma:$ Bandalphabet, $\textvisiblespace \in \Gamma$, $\Sigma \subset \Gamma$\\
+\\
+4. $\delta: (Q-\{q_{acc}, q_{rej}\}) \times \Gamma \:\xrightarrow{total}\: Q \times \Gamma \times \{L, R\}$\\
+\\
+5. $q_0 \in Q:$ Startzustand\\
+\\
+6. $q_{acc} \in Q:$ akzeptierende Zustand\\
+\\
+\tab\tab $q_{acc} \neq q_{rej}$\\
+\\
+7. $q_{rej} \in Q:$ verwerfender Zustand\\
+\\
 
 
 

@@ -132,7 +132,7 @@ Haskell: $++$\tab $""$ ($\epsilon$)\\
 \\
 \\
 \uline{Monoid}: Sei $M$ eine Menge und\\
-\tab $\circ : M \times M \rightarrow^{total} M$ eine Verknuepfung\\
+\tab $\circ : M \times M \xrightarrow{total} M$ eine Verknuepfung\\
 \\
 Das Paar $(M, \circ)$ heisst ein \uline{Monoid}, falls gilt:\\
 \\
@@ -284,7 +284,7 @@ Liefert \uline{accept} oder \uline{fertig}\\
 \\
 2. $\Sigma$ ist das \uline{Eingabealphabet} (z.B. $1101$)\\
 \\
-3. $\delta : Q \times \Sigma \rightarrow^{total} Q$\\
+3. $\delta : Q \times \Sigma \xrightarrow{total} Q$\\
 \tab \uline{Transitionsfunktion}\\
 \\
 4. $q_0$ Startzustand\\
@@ -503,7 +503,7 @@ $\Sigma_{\epsilon} = \Sigma \cup \{\epsilon\}$\\
 \\
 2. $\Sigma$ ist das \uline{Eingabealphabet} (z.B. $1101$)\\
 \\
-3. $\delta : Q \times \Sigma_{\textcolor{red}{\epsilon}} \rightarrow^{total} P(Q)$\\
+3. $\delta : Q \times \Sigma_{\textcolor{red}{\epsilon}} \xrightarrow{total} P(Q)$\\
 \tab \uline{Transitionsfunktion}\\
 \\
 4. $q_0 \in Q$ Startzustand\\
@@ -875,13 +875,152 @@ IfCmd \: $::=$ \uline{if} expr \uline{then} cmd optElse \uline{endif}\\
 optElse $::=$ $\epsilon$\\
 optElse $::=$ \uline{else} cmd\\
 \\
+\rule{\textwidth}{0.4mm}\\
+\\
+\framebox[1.5\width]{\textcolor{red}{\uline{\textcolor{black}{IfCmd}}} $::=$ \uline{if} \textcolor{red}{\uline{\textcolor{black}{expr}}} \uline{then} \textcolor{red}{\uline{\textcolor{black}{cmd}}} \uline{endif}} \tab Produktion\\
+\\
+\textcolor{red}{nicht-terminal Symbole}\\
+terminal Symbole\\
 \\
 \rule{\textwidth}{0.4mm}\\
 \\
-\framebox[1.5\width]{\textcolor{red}{\uline{\textcolor{black}{IfCmd}}} $::=$ \uline{if} \textcolor{red}{\uline{\textcolor{black}{expr}}} \uline{then} \textcolor{red}{\uline{\textcolor{black}{cmd}}} \uline{endif}} \tab Produktion
+\uline{$\mu$Deutsch}\\
+\\
+\textcolor{red}{\uline{\textcolor{black}{Satz}}} $::=$ \textcolor{red}{\uline{\textcolor{black}{Subjekt}}} \textcolor{red}{\uline{\textcolor{black}{Praedikat}}} \textcolor{red}{\uline{\textcolor{black}{Objekt}}} \textcolor{green}{\uline{\textcolor{black}{.}}}\\
+\textcolor{red}{\uline{\textcolor{black}{Subjekt}}} $::=$ \textcolor{green}{\uline{\textcolor{black}{Vogel}}}\\ 
+\textcolor{red}{\uline{\textcolor{black}{Subjekt}}} $::=$ \textcolor{green}{\uline{\textcolor{black}{Katze}}}\\
+\textcolor{red}{\uline{\textcolor{black}{Objekt}}} $::=$ \textcolor{red}{\uline{\textcolor{black}{Subjekt}}}\\
+\textcolor{red}{\uline{\textcolor{black}{Praedikat}}} $::=$ \textcolor{green}{\uline{\textcolor{black}{frisst}}}\\
+\\
+\\
+Satz\\
+$\Rightarrow$ Subjekt Praedikat Objekt \uline{.}\\
+\\
+$\Rightarrow$ \uline{Vogel} Praedikat Objekt \uline{.}\\
+\\
+$\Rightarrow$ \uline{Vogel} Praedikat Subjekt \uline{.}\\
+\\
+$\Rightarrow$ \uline{Vogel} Praedikat \uline{Katze} \uline{.}\\
+\\
+$\Rightarrow$ \uline{Vogel} \uline{frisst} \uline{Katze} \uline{.}\\
+\\
+\\
+\rule{\textwidth}{0.4mm}\\
+\\
+Eine \uline{Kontextfreie Grammatik} ist ein 4-Tuple $(V, \Sigma, R, S)$ mit\\
+\\
+1. $V:$ Alphabet der NTS (\uline{n}icht-\uline{t}erminal \uline{s}ymbole)\\
+\\
+2. $\Sigma:$ Alphabet der TS (\uline{t}erminal \uline{s}ymbole)\\
+\\
+3. $R:$ endliche Menge von \uline{Produktionen}\\
+\tab Produktion $\in V \times (V \cup \Sigma)^*$\\
+\\
+4. $S \in V:$ Startsymbol\\
+\\
+\\
+\rule{\textwidth}{0.4mm}\\
+\\
+\uline{Herleitung, Sprache}\\
+\\
+Seien $u, v, w \in (V \cup \Sigma)^*$, $A \xrightarrow{::=} w \in R$\\
+\\
+Dann\:\: $uAv \Rightarrow uwv$\\
+\tab\tab $\downarrow$\\
+\tab "leitet her"\\
+\\
+$u$ leitet $v$ her, $u \Rightarrow^{*} v$, falls $u=v$\\
+\\
+oder es gibt eine Folge\\
+\\
+$u \Rightarrow u_1 \Rightarrow u_2 \Rightarrow ... \Rightarrow u_k \Rightarrow v$\\
+\\
+Sei $G = (V, \Sigma, R, S)$\\
+\\
+Dann ist\\
+\\
+\begin{tabular}{|p{10cm}}
+\begin{tabular}{|p{10cm}}
+\begin{tabular}{|p{10cm}}
+$L(G) = \{ w \in \Sigma^* \:\vert\: S \Rightarrow^* w\}$
+\end{tabular}
+\end{tabular}
+\end{tabular}
+\\
+\\
+\rule{\textwidth}{0.4mm}\\
+\\
+\uline{Beispiel}\\
+\\
+$L = \{ 0^n \# 1^n \:\vert\: n \ge 0 \}$ \uline{nicht} regulaer\\
+\\
+$\Sigma = \{0,1,\#\}$\\
+$A \rightarrow 0A1$\\
+$A \rightarrow \#$\\
+\\
+$A$\\
+\tab $\Rightarrow$\\
+$0A1$\\
+\tab $\Rightarrow$\\
+$00A11$\\
+\tab $\Rightarrow$\\
+$...$\\
+\\
+$= \{\#, 0\#1, 00\#11, 000\#111, ...\}$
+\\
+\\
+\rule{\textwidth}{0.4mm}\\
+\\
 
+\chapter{Siebte Woche}
+\section{Turing Maschinen}
 
-
+\uline{Satz}\\
+\\
+Jede regulaere Sprache ist Kontextfrei\\
+\\
+$\qed$\\
+\\
+\\
+\uline{Beweis-Idee}\\
+\\
+\uline{DFA:}\\
+\\
+$<$skitze$>$\\
+\\
+$R_1 \rightarrow 0R_1 \:\vert\: 1R_2$\\ 
+$R_2 \rightarrow 0R_3 \:\vert\: 1R_2 \:\vert\: \epsilon$\\
+$R_3 \rightarrow 0R_2 \:\vert\: 1R_2$\\
+\\
+\rule{\textwidth}{0.4mm}\\
+\\
+$\overline{L} = \Sigma^* - L$\\
+\\
+\rule{\textwidth}{0.4mm}\\
+\\
+$<$skitze$>$\\
+\\
+\uline{Turing Maschine}\\
+\\
+Alan Turing (1912 - 1954)\\
+$\hookrightarrow$ ACM Turing Award\\
+\\
+$<$skitze$>$\\
+\\
+\\
+\uline{Turing-Maschine} 7-Tupel\\
+\\
+$(Q, \Sigma, \Gamma, \delta, q_0, q_{acc}, q_{rej})$\\
+\\
+1. $Q:$ endliche Menge von Zustaenden\\
+\tab $|Q| \geq 2$ (mind. $acc$ und $rej$)\\
+\\
+2. $\Sigma:$ Eingabealphabet, Blank $\textvisiblespace \not \in \Sigma$ (gehoert nicht zur Eingabe)\\
+\\
+3. $\Gamma:$ Bandalphabet, $\textvisiblespace \in \Gamma$, $\Sigma \subset \Gamma$\\
+\\
+4. $\delta: (Q-\{q_{acc}, q_{rej}\}) \times \Gamma \:\xrightarrow{total}\: Q \times \Gamma \times \{L, R\}$\\
+\\
 
 
 
