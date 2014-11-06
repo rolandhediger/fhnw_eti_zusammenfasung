@@ -24,7 +24,9 @@
 %\author{kyriakosschwarz}
 \title{Einfuehrung in die Theoretische Informatik}
 
-
+\newenvironment{rcases}
+  {\left.\begin{aligned}}
+  {\end{aligned}\right\rbrace}
 
 %Math
 \usepackage{amsmath}
@@ -1021,8 +1023,37 @@ $(Q, \Sigma, \Gamma, \delta, q_0, q_{acc}, q_{rej})$\\
 \\
 4. $\delta: (Q-\{q_{acc}, q_{rej}\}) \times \Gamma \:\xrightarrow{total}\: Q \times \Gamma \times \{L, R\}$\\
 \\
+5. $q_0 \in Q:$ Startzustand\\
+\\
+6. $q_{acc} \in Q:$ akzeptierende Zustand\\
+\\
+\tab\tab $q_{acc} \neq q_{rej}$\\
+\\
+7. $q_{rej} \in Q:$ verwerfender Zustand\\
+\\
 
+\chapter{Achte Woche}
+\section{Turing Erkennbarkeit / Entscheidbarkeit}
 
+TM (Turing Maschine) $M$ akzeptiert (verwirft) Eingabe $w \in \Sigma^*$, falls eine Folge von Konfigurationen existiert $C_1, C_2, ... , C_k$ mit\\
+\\
+1. $C_1$ ist die Startkonfiguration\\
+2. $C_i$ liefert $C_{i+1}$ gemaess Bewegungen gemaess $\delta$\\
+3. $C_k$ ist akzeptierend (verwerfend)\\
+\\
+$\qed$\\
+\\
+\\
+\uline{Beispiel}\\
+\\
+TM, die $A = \{ O^{2^n} \:\vert\: n \geq 0\}$, also\\
+$A = \{0, 00, 0000, 00000000, ... \}$\\
+\\
+$\Sigma = \{0\}$\\
+$\Gamma = \{0, \textvisiblespace, x\}$\\
+$Q = \{ q_1, ... , q_5, q_{acc}, q_{rej}\}$\\
+$Q' = Q - \{q_{acc}, q_{rej}\}$\\
+$\delta: Q' \times \Gamma \xrightarrow{total} Q \times \Gamma \times \{L,R\}$\\
 
 
 
