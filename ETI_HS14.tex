@@ -1145,7 +1145,7 @@ $(\lambda x . x + 1) (z  + 3)$\\
 - While\\
 \\
 \\
-\rule{\textwidth}{0.4mm}\\
+\rule{\textwidth}{0.4mm}\\\textbf{}
 \\
 \uline{Church-Turing-These}\\
 Jede im intuitiven Sinne berechenbare Funktion lässt sich durch eine TM berechnen.\\
@@ -1168,8 +1168,24 @@ $\underbrace{\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab}_{\text{$<M>\:\leftarr
 \color{red}{*}\color{black} $\underbrace{sym_0 \textbf{,} ... \textbf{,} sym_{w-1} \textbf{,} \textvisiblespace}_{\text{$<w>$ Wort}}$\\
 \\
 $\underbrace{\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab}_{\text{$<M, w>$}}$\\
-
-
+\\
+\\
+$trans ::= \underbrace{0^i}_{\text{$q_i \in C$}}\textbf{,}\underbrace{0^j}_{\text{$s \in \Gamma$}}\textbf{,}\underbrace{(A\vert J\vert 0^k \textbf{,})}_{\underbrace{\text{$acc \:\vert\: rej \:\vert\: q_k$}}_{\text{$\in Q$}}}\underbrace{0^l}_{\text{$q_l \in \Gamma$}} \textbf{,} \underbrace{(L\vert R)}_{\text{links / rechts}}$\\
+\\
+\uline{Beispiel}\\
+\\
+$00\textbf{,}0\textbf{,}A0\textbf{,}L$\\
+\\
+codiert\\
+\\
+$\delta(q_2,s_1) = (q_{acc},s_1,L)$\\
+\\
+$sym ::= \underbrace{0^i}_{\text{$s_1 \in \Sigma$}}$\\
+\\
+\\
+\rule{\textwidth}{0.4mm}\\
+\\
+\uline{Universalmaschine $U$}
 
 
 
