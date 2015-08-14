@@ -1086,11 +1086,89 @@ Sprache $L$ heisst \uline{Turing-entscheidbar} (rekursiv, entscheidbar), falls e
 $L(M_2) = \{ 0^{2^n} \:\vert\: n \geq 0\}$\\
 $L(M_2^{\infty}) = L(M_2)$\\
 \\
-Wenn Sprache Turing-entscheidbar, dann erst recht erkennbar\\
+Wenn Sprache Turing-entscheidbar, dann erst recht erkennbar.\\
 \\
 \\
 \rule{\textwidth}{0.4mm}\\
 \\
+
+\chapter{Neunte Woche}
+\section{Pruefung}
+
+...\\
+
+\rule{\textwidth}{0.4mm}
+
+\chapter{Zehnte Woche}
+\section{Varianten von TM}
+
+$L_1 = \{ w \# w \:\vert\: w \in \{0,1\}^* \}$\\
+\\
+$01\#\#01$\\
+$01\#01$\\
+\\
+$L_2 = \{ ww \:\vert\: w \in \{ 0,1 \}^* \}$\\
+\\
+$\textvisiblespace010110$\\
+$\textvisiblespace x1011x$\\
+$\textvisiblespace xx01xx$\\
+\\
+$\sum^{n}_{k=0}{3^k}$\\
+\\
+Haskell: $sum[3i \:\vert\: i \leftarrow [0..12]]$\\
+\\
+\\
+\uline{Varianten von TM}\\
+\\
+1. Mehrspurmaschine\\
+\\
+$\delta : Q \times \Gamma^k \rightarrow Q \times \Gamma^k \times \{ L , R \}$\\
+\\
+\\
+2. Mehrbandmaschine\\
+\\
+\\
+3. Nichtdeterministische TM lässt sich simulieren\\
+\\
+\\
+\rule{\textwidth}{0.4mm}\\
+\\
+- $\lambda$-Kalkuel 1936 Church\\
+- TM \tab 1936 Turing\\
+\\
+$(\lambda x . x + 1) (z  + 3)$\\
+\tab $\rightarrow (z+3) + 1$\\
+\\
+\\
+- Rekursive Funktionen\\
+- Goto\\
+- While\\
+\\
+\\
+\rule{\textwidth}{0.4mm}\\
+\\
+\uline{Church-Turing-These}\\
+Jede im intuitiven Sinne berechenbare Funktion lässt sich durch eine TM berechnen.\\
+\\
+$\qed$\\
+\\
+\uline{Codierungen, Beispiel TM}\\
+\\
+$\Sigma_u = \{0,1,\textbf{,},R,L,A,J,B,C,Q,D,W\}$\\
+\\
+$\vert\Sigma_u\vert=12$\\
+\\
+$B0^s1^{(g-1)-s}\textbf{,}C0^c\textbf{,}\underbrace{Q(A\vert J\vert 0^q \textbf{,})}_{\text{Startzustand}}D \underbrace{trans_0 ... trans_1}_{\text{$\delta$}}\color{red}*$\\
+$s = \vert \Sigma \vert$\\
+$g = \vert \Gamma \vert$\\
+$c = \vert C \vert$\\
+$C = Q - \{q_{acc}, q_{rej}\}$\\
+$\underbrace{\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab}_{\text{$<M>\:\leftarrow$  Codierung von $M$}}$\\
+\\
+\color{red}{*}\color{black} $\underbrace{sym_0 \textbf{,} ... \textbf{,} sym_{w-1} \textbf{,} \textvisiblespace}_{\text{$<w>$ Wort}}$\\
+\\
+$\underbrace{\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab}_{\text{$<M, w>$}}$\\
+
 
 
 

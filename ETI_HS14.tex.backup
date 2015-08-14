@@ -1031,6 +1031,9 @@ $(Q, \Sigma, \Gamma, \delta, q_0, q_{acc}, q_{rej})$\\
 \\
 7. $q_{rej} \in Q:$ verwerfender Zustand\\
 \\
+\\
+\rule{\textwidth}{0.4mm}\\
+\\
 
 \chapter{Achte Woche}
 \section{Turing Erkennbarkeit / Entscheidbarkeit}
@@ -1054,6 +1057,74 @@ $\Gamma = \{0, \textvisiblespace, x\}$\\
 $Q = \{ q_1, ... , q_5, q_{acc}, q_{rej}\}$\\
 $Q' = Q - \{q_{acc}, q_{rej}\}$\\
 $\delta: Q' \times \Gamma \xrightarrow{total} Q \times \Gamma \times \{L,R\}$\\
+\\
+\\
+\rule{\textwidth}{0.4mm}\\
+\\
+Sei $M$ eine TM ueber $\Sigma$\\
+
+$L(M) = \{w \in \Sigma^* \:\vert\: M$ akzeptiert $w \}$ ist die von $M$ \uline{erkannte} Sprache\\
+\\
+$M$ partitioniert $\Sigma^*$\\
+\\
+(1) Solange $M$ laeuft, wissen wir nicht ob zu anhalten wird, oder weiterlaufen wird\\
+\\
+Sei $w \in acc$. Dann haelt $M$ an. Dann \uline{weiss} man, dass $w \in acc$. Sei $w \in rej$. Analog. Sei $w \in \infty$. Dann laeuft $M$ $\infty$ lange.\\
+Mit (1) \uline{weiss} man \uline{nie}, dass $w \in \infty$\\
+\\
+Super waere eine Maschine $H$, die \uline{immer} haelt und sagt, ob eine Maschine $M$ auf eine Eingabe $w$ haelt oder nicht\\
+\\
+Sei $M$ eine TM ueber $\Sigma$\\
+$L(M) = \{w \in \Sigma^* \:\vert\: M$ akzeptiert $w \}$ ist die von $M$ \uline{erkannte} Sprache\\
+\\
+Sprache $L$ heisst \uline{Turing-erkennbar} (rekursiv-aufzaehlbar, semi-entscheidbar), falls eine TM gibt, die $L$ erkennt\\
+\\
+Sprache $L$ heisst \uline{Turing-entscheidbar} (rekursiv, entscheidbar), falls eine TM gibt, die $L$ erkennt \uline{und} auf jeder Eingabe haelt\\
+\\
+\uline{Beispiel:} $M_2$ \uline{Entscheider}, $M_2^{\infty}$ nicht (aber \uline{Erkenner})\\
+\\
+$L(M_2) = \{ 0^{2^n} \:\vert\: n \geq 0\}$\\
+$L(M_2^{\infty}) = L(M_2)$\\
+\\
+Wenn Sprache Turing-entscheidbar, dann erst recht erkennbar\\
+\\
+\\
+\rule{\textwidth}{0.4mm}\\
+\\
+
+\chapter{Neunte Woche}
+\section{Pruefung}
+
+---
+
+\\
+\\
+\rule{\textwidth}{0.4mm}\\
+\\
+
+\chapter{Zehnte Woche}
+\section{Varianten von TM}
+
+$L_1 = \{ w # w \:\vert\: w \in \{0,1\}^* \}$\\
+\\
+$01##01$\\
+$01#01$\\
+\\
+$L_2 = \{ ww \:\vert\: w \in \{ 0,1 \}^* \}$\\
+\\
+$\textvisiblespace010110$\\
+$\textvisiblespace x1011x$\\
+$\textvisiblespace xx01xx$\\
+\\
+$\Sigma^{n}_{k=0}{3^k}$\\
+Haskell: $sum[3\^i \:\vert\: i \leftarrow [0..12]]$\\
+
+\\
+\\
+\rule{\textwidth}{0.4mm}\\
+\\
+
+
 
 
 
